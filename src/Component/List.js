@@ -9,7 +9,6 @@ import Avatar from '@material-ui/core/Avatar';
 import IconButton from '@material-ui/core/IconButton';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
-import FolderIcon from '@material-ui/icons/Folder';
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 
@@ -34,7 +33,23 @@ export default function InteractiveList() {
   }
   
   const editItem = (x) => {
-    console.log(x)
+    const f_Name = prompt('Enter first name')
+    const l_Name = prompt('Enter last name')
+    const enteredEmail = prompt('Enter Email')
+    let theId = x.id;
+    let newArray = data.filter(e => e !== x)
+    setData(newArray)
+
+    setData(
+      prev => [...prev,{
+        "id":theId,
+        "avatar":"https://cdn.iconscout.com/icon/premium/png-512-thumb/profile-1506810-1278719.png",
+        "first_name":f_Name,
+        "last_name":l_Name,
+        "email":enteredEmail
+      }]
+    )
+    console.log(data)
   }
   useEffect(() =>{
       fetch("https://reqres.in/api/users?page=2")
