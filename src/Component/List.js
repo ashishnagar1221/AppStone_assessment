@@ -37,20 +37,21 @@ export default function InteractiveList() {
     const l_Name = prompt('Enter last name')
     const enteredEmail = prompt('Enter Email')
     let theId = x.id;
-    let newArray = data.filter(e => e !== x)
+    let newArray = data.map(item =>{
+      if(item.id == x.id){
+        const updatedItem = {
+          ...item,
+          first_name: f_Name,
+          last_name: l_Name,
+          email: enteredEmail
+        };
+        return updatedItem
+      }
+      return item
+    })
     setData(newArray)
-
-    setData(
-      prev => [...prev,{
-        "id":theId,
-        "avatar":"https://cdn.iconscout.com/icon/premium/png-512-thumb/profile-1506810-1278719.png",
-        "first_name":f_Name,
-        "last_name":l_Name,
-        "email":enteredEmail
-      }]
-    )
-    console.log(data)
   }
+  
   useEffect(() =>{
       fetch("https://reqres.in/api/users?page=2")
       .then(res => res.json())
