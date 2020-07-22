@@ -28,6 +28,14 @@ export default function InteractiveList() {
   const classes = useStyles();
   const[data,setData] = React.useState([]);
 
+  const deleteItem = (x) => {
+    let newArray = data.filter(e => e !== x)
+    setData(newArray)
+  }
+  
+  const editItem = (x) => {
+    console.log(x)
+  }
   useEffect(() =>{
       fetch("https://reqres.in/api/users?page=2")
       .then(res => res.json())
@@ -48,7 +56,7 @@ export default function InteractiveList() {
                 return(
                   <ListItem key ={ele.id}>
                   <ListItemAvatar>
-                    <Avatar alt="Cindy Baker" src={ele.avatar} >
+                    <Avatar alt="IMG" src={ele.avatar} >
                     </Avatar>
                   </ListItemAvatar>
                   <ListItemText
@@ -56,10 +64,10 @@ export default function InteractiveList() {
                     secondary={ele.email}
                   />
                   <ListItemSecondaryAction>
-                  <IconButton edge="end" aria-label="delete" onClick={() => { console.log(ele.id); }}>
+                  <IconButton edge="end" aria-label="delete" onClick={() => editItem(ele)}>
                         <EditIcon/>
                     </IconButton>
-                    <IconButton edge="end" aria-label="delete" onClick={() => { console.log(ele.id); }}>
+                    <IconButton edge="end" aria-label="delete" onClick={() => deleteItem(ele)}>
                       <DeleteIcon/>
                     </IconButton>
                   </ListItemSecondaryAction>
